@@ -1,5 +1,7 @@
 package com.lyacoin.api.exception;
 
+import lombok.Data;
+
 public class AppException extends RuntimeException {
 
     private String messageForClient;
