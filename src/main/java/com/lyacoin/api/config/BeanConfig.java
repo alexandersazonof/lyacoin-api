@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.client.RestTemplate;
 
 import java.security.Key;
 import java.util.Collections;
@@ -43,6 +44,11 @@ public class BeanConfig {
         filterFilterRegistrationBean.setFilter(tokenFilter);
         filterFilterRegistrationBean.setUrlPatterns(Collections.singletonList("/accounts/*"));
         return filterFilterRegistrationBean;
+    }
+
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
     }
 
     @Bean

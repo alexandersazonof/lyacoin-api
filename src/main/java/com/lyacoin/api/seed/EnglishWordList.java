@@ -1,7 +1,7 @@
 package com.lyacoin.api.seed;
 
 import com.lyacoin.api.exception.AppException;
-import com.lyacoin.api.exception.ExceptionMessage;
+import com.lyacoin.api.exception.ExceptionMessageClient;
 
 public enum EnglishWordList {
     INSTANCE;
@@ -11,7 +11,7 @@ public enum EnglishWordList {
         try {
             return words[index];
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new AppException(ExceptionMessage.INTERNAL_ERROR, "Incorrect index of words array");
+            throw new AppException(ExceptionMessageClient.INTERNAL_ERROR, "Incorrect index of words array");
         }
     }
 
