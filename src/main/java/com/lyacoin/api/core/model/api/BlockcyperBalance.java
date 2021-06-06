@@ -1,13 +1,12 @@
-package com.lyacoin.api.core.model.account;
+package com.lyacoin.api.core.model.api;
 
-import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
 
 @Data
-@Builder
-public class AccountBalance {
+public class BlockcyperBalance {
     private String address;
     private BigDecimal balance;
+    private String error;
 }

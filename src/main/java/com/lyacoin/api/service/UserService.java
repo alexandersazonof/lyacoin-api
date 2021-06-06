@@ -1,6 +1,6 @@
 package com.lyacoin.api.service;
 
-import com.lyacoin.api.core.dto.UserRegistrationDto;
+import com.lyacoin.api.core.dto.UserDataDto;
 import com.lyacoin.api.core.model.User;
 import com.lyacoin.api.exception.AppException;
 import com.lyacoin.api.exception.ExceptionMessageClient;
@@ -20,7 +20,7 @@ public class UserService {
     @Autowired
     private InitSeedService initSeedService;
 
-    public User save(UserRegistrationDto user) {
+    public User save(UserDataDto user) {
         if (user.getSeed() == null || user.getSeed().size() < 1) {
             throw new AppException(ExceptionMessageClient.INTERNAL_ERROR, "Seed yet exist");
         }

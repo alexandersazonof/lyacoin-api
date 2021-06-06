@@ -1,11 +1,7 @@
 package com.lyacoin.api.config;
 
 import com.lyacoin.api.auth.filters.ParseTokenFilter;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.security.Keys;
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
-import org.jasypt.util.password.BasicPasswordEncryptor;
-import org.jasypt.util.password.PasswordEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -13,8 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
-import java.security.Key;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.Random;
 
 @Configuration
@@ -33,16 +28,14 @@ public class BeanConfig {
     }
 
     @Bean
-    public Key key() {
-        return Keys.secretKeyFor(SignatureAlgorithm.HS256);
-    }
-
-    @Bean
     public FilterRegistrationBean<ParseTokenFilter> filterFilterRegistrationBean() {
         FilterRegistrationBean<ParseTokenFilter> filterFilterRegistrationBean = new FilterRegistrationBean<>();
 
         filterFilterRegistrationBean.setFilter(tokenFilter);
-        filterFilterRegistrationBean.setUrlPatterns(Collections.singletonList("/accounts/*"));
+        filterFilterRegistrationBean.setUrlPatterns(Arrays.asList(
+                "/accounts/*",
+                "/sessions/*"
+        ));
         return filterFilterRegistrationBean;
     }
 

@@ -1,34 +1,33 @@
-package com.lyacoin.api.core.model.account;
+package com.lyacoin.api.core.model.session;
 
-import com.lyacoin.api.core.Currency;
 import com.lyacoin.api.core.model.User;
 import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
 @Data
-@Document("account")
 @Builder
-public class Account {
+@Document("session")
+public class Session {
 
     @Id
     private String id;
+    private String token;
+    private String password;
+    private int countAttempts;
 
     @DBRef
     private User user;
 
-    private Currency currency;
-    private String name;
-    private String publicKey;
-    private String privateKey;
-    private String wif;
-    private String address;
-
     @CreatedDate
     private LocalDateTime createdAt;
+
+    @LastModifiedDate
+    private LocalDateTime updatedAt;
 }

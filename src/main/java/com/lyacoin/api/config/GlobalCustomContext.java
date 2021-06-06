@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 public class GlobalCustomContext {
 
     public User user;
+    public String token;
 
     public String getUserId() {
         return user == null ? null : user.getId();
