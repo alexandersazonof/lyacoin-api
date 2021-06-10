@@ -19,7 +19,6 @@ public class SignUtils {
         // checking our key object
         NetworkParameters main =  MainNetParams.get();
         String check = key.getPrivateKeyAsWiF(main);
-        System.out.println(wif.equals(check));  // true
 
         // creating Sha object from string
         Sha256Hash hash = Sha256Hash.wrap(msg);

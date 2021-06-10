@@ -1,7 +1,6 @@
 package com.lyacoin.api.config;
 
 import com.lyacoin.api.auth.filters.ParseTokenFilter;
-import lombok.extern.slf4j.Slf4j;
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,7 +13,6 @@ import java.util.Arrays;
 import java.util.Random;
 
 @Configuration
-@Slf4j
 public class BeanConfig {
 
     @Value("${jacypt.secret}")
@@ -48,7 +46,6 @@ public class BeanConfig {
 
     @Bean
     public StandardPBEStringEncryptor standardPBEStringEncryptor() {
-        log.info("Secret: " + secret);
         StandardPBEStringEncryptor standardPBEStringEncryptor = new StandardPBEStringEncryptor();
         standardPBEStringEncryptor.setPassword(secret);
         return standardPBEStringEncryptor;

@@ -18,6 +18,7 @@ import com.lyacoin.api.service.impl.CoinGeckoPriceService;
 import com.lyacoin.api.utils.SignUtils;
 import com.lyacoin.api.utils.UrlUtils;
 import lombok.extern.log4j.Log4j2;
+import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.http.HttpEntity;
@@ -51,6 +52,9 @@ public class BlockCyperService {
     @Autowired
     private CoinGeckoPriceService coinGeckoPriceService;
 
+    @Autowired
+    private StandardPBEStringEncryptor encryptor;
+
     private final static BigDecimal SATOSHIS_VALUE = BigDecimal.valueOf(100000000);
 
     public String createAccount(String name, String currency) {
@@ -59,6 +63,7 @@ public class BlockCyperService {
         if (account == null) {
             throw new AppException(ExceptionMessageClient.CAN_NOT_CREATE_ACCOUNT, "Error because account is null");
         }
+
         accountService.save(Account.builder()
                 .user(User.builder().id(context.user.getId()).build())
                 .name(name)
@@ -192,7 +197,7 @@ public class BlockCyperService {
 
             List<String> signs = responseCreateTransaction.getSigns()
                     .stream()
-                    .map(it -> signUtils.signBtc(it, account.getWif()))
+                    .map(it -> signUtils.signBtc(it, encryptor.decrypt(account.getWif())))
                     .collect(Collectors.toList());
 
 

@@ -17,6 +17,8 @@ public class UrlUtils {
 
     public String getLinkForBalanceInfo(String address, String currency) {
         return String.format("%s%s/main/addrs/%s/balance", blockHyper, currency, address);
+
+//        return String.format("%s%s/main/addrs/%s/balance?token=76cd9457eb424d9d9b8e105d5d36de7f", blockHyper, currency, address);
     }
 
     public String getLinkForPrice(String symbol) {
@@ -25,18 +27,26 @@ public class UrlUtils {
 
     public String getLinkForCreateAccount(String currency) {
         return String.format("%s%s/main/addrs", blockHyper, currency);
+
+//        return String.format("%s%s/main/addrs?token=76cd9457eb424d9d9b8e105d5d36de7f", blockHyper, currency);
     }
 
     public String getLinkForCreateTx(String currency) {
         return String.format("%s%s/main/txs/new", blockHyper, currency);
+
+//        return String.format("%s%s/main/txs/new?token=76cd9457eb424d9d9b8e105d5d36de7f", blockHyper, currency);
     }
 
     public String getLinkForSendTx(String currency) {
+//        return String.format("%s%s/main/txs/send?token=76cd9457eb424d9d9b8e105d5d36de7f", blockHyper, currency);
+
         return String.format("%s%s/main/txs/send", blockHyper, currency);
     }
 
     public String getLinkForFullHistory(String address, String currency) {
         return String.format("%s%s/main/addrs/%s/full", blockHyper, currency, address);
+
+//        return String.format("%s%s/main/addrs/%s/full?token=76cd9457eb424d9d9b8e105d5d36de7f", blockHyper, currency, address);
     }
 
     public String getHistoryData(String currency, String date) {

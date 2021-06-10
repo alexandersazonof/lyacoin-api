@@ -5,7 +5,9 @@ import com.lyacoin.api.core.model.account.Account;
 import com.lyacoin.api.core.model.account.AccountHistory;
 import com.lyacoin.api.core.request.AccountHistoryRequest;
 import com.lyacoin.api.repository.AccountRepository;
+import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -20,6 +22,9 @@ public class AccountService {
 
     @Autowired
     private AccountRepository accountRepository;
+
+    @Autowired
+    private StandardPBEStringEncryptor encryptor;
 
     private final static BigDecimal SATOSHI_COUNT = BigDecimal.valueOf(100000000);
     private final static Integer MAX_LIMIT = 30;
@@ -40,6 +45,7 @@ public class AccountService {
                 .collect(Collectors.toList());
     }
 
+    @CacheEvict(value = "account", allEntries = true)
     public List<AccountDto> findByUserId(String userId) {
          return accountRepository.findAllByUserId(userId)
                 .stream()
@@ -52,6 +58,9 @@ public class AccountService {
     }
 
     public Account save(Account account) {
+        account.setWif(encryptor.encrypt(account.getWif()));
+        account.setPrivateKey(encryptor.encrypt(account.getPrivateKey()));
+
         return accountRepository.save(account);
     }
 

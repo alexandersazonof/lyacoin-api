@@ -13,7 +13,7 @@ import java.util.List;
 @Slf4j
 public class ClearCacheTask {
 
-    private static List<String> cashes = Arrays.asList("history", "balance");
+    private static List<String> cashes = Arrays.asList("history", "balance", "account");
 
     @Autowired
     private CacheManager cacheManager;
